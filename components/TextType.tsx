@@ -51,7 +51,6 @@ const TextType = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
-  const [showCursorBlink, setShowCursorBlink] = useState(true);
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -168,16 +167,6 @@ const TextType = ({
     variableSpeed,
     onSentenceComplete
   ]);
-
-  useEffect(() => {
-    if (!showCursor) return;
-
-    const cursorInterval = setInterval(() => {
-      setShowCursorBlink(prev => !prev);
-    }, 500);
-
-    return () => clearInterval(cursorInterval);
-  }, [showCursor]);
 
   const shouldHideCursor =
     hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
