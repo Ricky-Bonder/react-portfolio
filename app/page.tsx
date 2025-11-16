@@ -8,6 +8,9 @@ import Particles from "@/components/Particles";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import Link from "next/link";
+import LogoLoop from "@/components/LogoLoop";
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiGo, SiSvelte, SiPostgresql, SiDocker, SiPython, SiHtml5, SiAngular, SiCss3, SiStorybook, SiMysql, SiSpringboot, SiGit, SiGithub, SiGitlab, SiJira, SiJavascript } from "react-icons/si";
+import { FaJava } from "react-icons/fa";
 
 const experiences = [
   {
@@ -29,6 +32,30 @@ const experiences = [
     description: "Interactive design",
     expslug: "experience-3",
   },
+];
+
+const techLogos = [
+  { node: <FaJava />, title: "Java", href: "https://www.java.com" },
+  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
+  { node: <SiHtml5 />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Glossary/HTML5" },
+  { node: <SiCss3 />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiAngular />, title: "Angular", href: "https://angular.io" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiSvelte />, title: "Svelte", href: "https://svelte.dev" },
+  { node: <SiGo />, title: "Go", href: "https://golang.org" },
+  { node: <SiSpringboot />, title: "Spring Boot", href: "https://spring.io/projects/spring-boot" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiStorybook />, title: "Storybook", href: "https://storybook.js.org" },
+  { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+  { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com" },
+  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com" },
+  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
+  { node: <SiGitlab />, title: "GitLab", href: "https://gitlab.com" },
+  { node: <SiJira />, title: "Jira", href: "https://www.atlassian.com/software/jira" },
 ];
 
 export default function Home() {
@@ -121,6 +148,23 @@ export default function Home() {
               >
                 Get in Touch
               </button>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mt-16">
+              <p className="text-sm text-foreground/60 mb-6">Technologies I Work With</p>
+              <div style={{ height: '80px', position: 'relative', overflow: 'hidden'}}>
+                <LogoLoop
+                  logos={techLogos}
+                  speed={50}
+                  direction="left"
+                  logoHeight={48}
+                  gap={40}
+                  hoverSpeed={0}
+                  scaleOnHover
+                  fadeOutColor="rgb(0, 0, 0)"
+                  ariaLabel="Technology stack"
+                />
+              </div>
             </motion.div>
           </motion.div>
           <section
