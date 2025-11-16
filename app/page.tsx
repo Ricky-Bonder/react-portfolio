@@ -7,25 +7,27 @@ import ClickSpark from "@/components/ClickSpark";
 import Particles from "@/components/Particles";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import Link from "next/link";
 
 const experiences = [
   {
     id: 1,
     title: "Go Svelte Web App",
     description: "Full-stack solution",
-    slug: "go-svelte-web-app",
+    fullDescription: "Design and development of a full-stack application supporting both embedded devices and web, using Go for a lightweight backend and Svelte for an optimized, responsive frontend.\nGo (Gin, Gorm) & Svelte (Svelte-Kit, Tailwind CSS, Playwright, Storybook)",
+    expslug: "go-svelte-web-app",
   },
   {
     id: 2,
     title: "Java Embedded App",
     description: "Functional embedded full-stack application",
-    slug: "java-embedded-app-1",
+    expslug: "java-embedded-app-1",
   },
   {
     id: 3,
     title: "Experience 3",
     description: "Interactive design",
-    slug: "experience-3",
+    expslug: "experience-3",
   },
 ];
 
@@ -123,9 +125,25 @@ export default function Home() {
           </motion.div>
           <section
             ref={projectsRef}
-            className="min-h-screen bg-background relative"
+            className="min-h-screen bg-background relative overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div className="absolute inset-0 z-0">
+              <div
+                style={{ width: "100%", height: "100%", position: "absolute" }}
+              >
+                <Particles
+                  particleColors={["#ffffff", "#ffffff"]}
+                  particleCount={200}
+                  particleSpread={10}
+                  speed={0.05}
+                  particleBaseSize={80}
+                  moveParticlesOnHover={false}
+                  alphaParticles={false}
+                  disableRotation={false}
+                />
+              </div>
+            </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +166,9 @@ export default function Home() {
                     transition={{ duration: 0.5, delay: experience.id * 0.1 }}
                     whileHover={{ y: -5 }}
                     className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 transition-colors cursor-pointer"
+                    onClick={() => localStorage.setItem('experienceData', JSON.stringify({ title: experience.title, description: experience.description, fullDescription: experience.fullDescription }))}
                   >
+                    <Link href={`/experiences/${experience.expslug}`}>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">
@@ -160,6 +180,10 @@ export default function Home() {
                     <p className="text-foreground/70">
                       {experience.description}
                     </p>
+                    <p className="text-foreground/60 mt-2">
+                      {experience.fullDescription}
+                    </p>
+                    </Link>
                   </motion.div>
                 ))}
               </div>
