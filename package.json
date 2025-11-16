@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "npm run build && rm -rf out_deploy && mkdir -p out_deploy/react-portfolio && cp -r out/* out_deploy/react-portfolio/ && npx gh-pages -d out_deploy"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
