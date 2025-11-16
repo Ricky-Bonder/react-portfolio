@@ -14,7 +14,7 @@ export function Navbar() {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Projects", href: "/projects" },
-    { label: "Blog", href: "/blog" },
+    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -34,15 +34,15 @@ export function Navbar() {
               />
           </Link>
 
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-4 md:gap-10 md:font-md items-center">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`hover:text-primary transition-colors ${
-                    isActive ? "font-bold underline" : ""
+                  className={`hover:text-primary text-lg transition-colors ${
+                    isActive ? "font-bold underline text-green-500" : ""
                   }`}
                 >
                   {item.label}

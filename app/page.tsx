@@ -2,8 +2,9 @@
 
 import { Navbar } from "@/components/layout/navbar";
 import TextType from "@/components/TextType";
-import LiquidEther from "@/components/LiquidEther";
 import { motion } from "framer-motion";
+import ClickSpark from "@/components/ClickSpark";
+import Particles from "@/components/Particles";
 
 export default function Home() {
   const containerVariants = {
@@ -21,68 +22,69 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div
-            style={{ width: "100%", height: "100%", position: "relative" }}
-          >
-            <LiquidEther
-              colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
-              mouseForce={20}
-              cursorSize={100}
-              isViscous={false}
-              viscous={30}
-              iterationsViscous={32}
-              iterationsPoisson={32}
-              resolution={0.5}
-              isBounce={false}
-              autoDemo={true}
-              autoSpeed={0.5}
-              autoIntensity={2.2}
-              takeoverDuration={0.25}
-              autoResumeDelay={3000}
-              autoRampDuration={0.6}
-            />
+      <ClickSpark
+        sparkColor="#fff"
+        sparkSize={10}
+        sparkRadius={20}
+        sparkCount={8}
+        duration={400}
+      >
+        <Navbar />
+        <main className="min-h-screen relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <div
+              style={{ width: "100%", height: "100%", position: "relative" }}
+            >
+              <Particles
+                particleColors={["#ffffff", "#ffffff"]}
+                particleCount={300}
+                particleSpread={10}
+                speed={0.1}
+                particleBaseSize={100}
+                moveParticlesOnHover={false}
+                alphaParticles={false}
+                disableRotation={false}
+              />
+            </div>
           </div>
-        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10"
-        >
-          <TextType
-            text={[
-              "Riccardo Ossola",
-              "Welcome to my portfolio",
-              "Let's create together!",
-            ]}
-            typingSpeed={80}
-            pauseDuration={1500}
-            showCursor={true}
-            cursorCharacter="_"
-          />
-
-          <motion.p
-            variants={itemVariants}
-            className="text-xl text-foreground/70 max-w-2xl mb-8"
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10"
           >
-            Building beautiful and functional web experiences with modern
-            technologies.
-          </motion.p>
+            <TextType
+              text={[
+                "Riccardo Ossola",
+                "Welcome to my portfolio",
+                "Let's create together!",
+              ]}
+              typingSpeed={80}
+              pauseDuration={1500}
+              showCursor={true}
+              cursorCharacter="_"
+            />
 
-          <motion.div variants={itemVariants} className="flex gap-4">
-            <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg">
-              View My Work
-            </button>
-            <button className="px-8 py-3 border border-primary/20 rounded-lg">
-              Get in Touch
-            </button>
+            <motion.p
+              variants={itemVariants}
+              className="text-xl text-foreground/70 max-w-2xl mb-8"
+            >
+              Building beautiful and functional web experiences with modern
+              technologies.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="flex gap-4">
+              <button className="px-8 py-3 bg-primary text-primary-foreground rounded-lg">
+                View My Work
+              </button>
+              <button className="px-8 py-3 border border-primary/20 rounded-lg">
+                Get in Touch
+              </button>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </main>
+        </main>
+      </ClickSpark>
     </>
   );
 }
