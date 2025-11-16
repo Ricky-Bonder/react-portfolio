@@ -2,10 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: "export",
+
+  output: 'export',
   images: { unoptimized: true },
-  basePath: "/react-portfolio",
-  assetPrefix: "/react-portfolio/",
+  basePath: process.env.NODE_ENV === 'production' ? '/react-portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/react-portfolio/' : '',
 };
 
 module.exports = nextConfig;

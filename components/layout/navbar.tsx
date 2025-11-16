@@ -28,7 +28,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="font-bold text-2xl">
               <img
-                src="/assets/gifs/porygon_sprite.gif"
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/assets/gifs/porygon_sprite.gif`}
                 alt="Home"
                 className="w-10 h-10"
               />
