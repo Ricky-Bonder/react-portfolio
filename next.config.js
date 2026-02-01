@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
-const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
-  basePath: isProd ? '/react-portfolio' : '',
   output: 'export',
-  images: { unoptimized: true },
+  // Sostituisci esattamente con il nome del tuo repo
+  basePath: '/react-portfolio', 
+  // assetPrefix serve a indicare a Next dove sono i file JS/CSS
+  assetPrefix: '/react-portfolio', 
+  images: {
+    unoptimized: true,
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
