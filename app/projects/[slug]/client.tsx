@@ -4,7 +4,6 @@ import { Navbar } from "@/components/layout/navbar";
 import { motion } from "framer-motion";
 import Particles from "@/components/Particles"; // Adjust import path if needed
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 // The data array (same as homepage)
 const experiences = [
@@ -58,8 +57,13 @@ const experiences = [
   },
 ];
 
+export async function generateStaticParams() {
+  return experiences.map((experience) => ({
+    slug: experience.expslug, // "slug" deve corrispondere al nome della cartella [slug]
+  }));
+}
+
 export default function ProjectsClient() {
-  const router = useRouter();
 
   return (
     <>
