@@ -49,8 +49,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`hover:text-primary text-lg transition-colors ${
-                    isActive ? "font-bold underline text-teal-500" : ""
+                 className={`transition-colors text-lg ${
+                    isActive
+                      ? "font-bold  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg p-1"
+                      : "text-foreground/70 hover:text-primary" // Stile inattivo (uguale al tuo paragrafo)
                   }`}
                 >
                   {item.label}

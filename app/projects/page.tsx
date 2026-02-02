@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import { Navbar } from '@/components/layout/navbar'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-
+import { Navbar } from "@/components/layout/navbar";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 const experiences = [
   {
     id: 1,
@@ -56,10 +56,39 @@ const experiences = [
 ];
 
 export default function ProjectsPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Rileviamo se il dispositivo è touch/mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      // Controlla se lo schermo è < 768px (tablet/mobile standard)
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
+    };
+
+    checkMobile(); // Check iniziale
+    window.addEventListener("resize", checkMobile); // Check al resize
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Definiamo le varianti per orchestrare l'animazione "Attiva"
+  const cardVariants = {
+    idle: { scale: 1, y: 0 },
+    active: { scale: 1.02, y: -5 },
+  };
+  const glowVariants = {
+    idle: { opacity: 0.2 }, // Leggermente visibile di base o 0 se preferisci
+    active: { opacity: 1 },
+  };
+
+  const readMoreVariants = {
+    idle: { opacity: 0, x: -10 },
+    active: { opacity: 1, x: 0 },
+  };
+
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">
+      <main className="min-h-screen bg-background relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -68,7 +97,8 @@ export default function ProjectsPage() {
           >
             <h1 className="text-5xl font-bold mb-4">Projects</h1>
             <p className="text-foreground/70 text-lg mb-12">
-              A collection of my work in embedded systems, full-stack development, and digital experiences.
+              A collection of my work in embedded systems, full-stack
+              development, and digital experiences.
             </p>
           </motion.div>
 
@@ -76,45 +106,77 @@ export default function ProjectsPage() {
             {experiences.map((experience) => (
               <motion.div
                 key={experience.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }} // Ho cambiato whileInView in animate per caricamento immediato
-                transition={{ duration: 0.5, delay: experience.id * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 transition-colors cursor-pointer bg-background/50 backdrop-blur-sm"
+                initial="idle"
+                whileHover={!isMobile ? "active" : undefined}
+                whileInView={isMobile ? "active" : undefined}
+                // Viewport setting per mobile: si attiva quando il 50% della card è visibile
+                viewport={{ amount: 0.5, margin: "0px 0px -100px 0px" }}
+                variants={cardVariants}
+                transition={{ duration: 0.5 }}
+                className="relative group rounded-xl cursor-pointer"
                 onClick={() =>
                   localStorage.setItem(
                     "experienceData",
-                    JSON.stringify({
-                      title: experience.title,
-                      description: experience.description,
-                      fullDescription: experience.fullDescription,
-                    })
+                    JSON.stringify(experience),
                   )
                 }
               >
-                <Link href={`/experiences/${experience.expslug}`}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-bold">
-                        {experience.id}
-                      </span>
+                {/* --- Livello Bagliore Gradiente (Gestito da Variants) --- */}
+                <motion.div
+                  variants={glowVariants}
+                  transition={{ duration: 0.3 }}
+                  className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl blur -z-10"
+                />
+
+                <motion.div
+                  className="relative h-full w-full bg-background/95 backdrop-blur-sm p-6 rounded-xl border transition-colors"
+                  animate={isMobile ? "active" : undefined}
+                  style={{ borderWidth: 1 }}
+                >
+                  <Link
+                    href={`/experiences/${experience.expslug}`}
+                    className="block h-full"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        {/* Icona ID */}
+                        <motion.span
+                          className="font-bold"
+                        >
+                          {experience.id}
+                        </motion.span>
+                      </div>
+
+                      {/* Titolo */}
+                      <motion.h3
+                        className="text-xl font-bold"
+                      >
+                        {experience.title}
+                      </motion.h3>
                     </div>
-                    <h3 className="text-xl font-bold">
-                      {experience.title}
-                    </h3>
-                  </div>
-                  <p className="text-foreground/70">
-                    {experience.description}
-                  </p>
-                  <p className="text-foreground/60 mt-2 text-sm">
-                    {experience.fullDescription}
-                  </p>
-                </Link>
+
+                    <p className="text-foreground/70">
+                      {experience.description}
+                    </p>
+                    <p className="text-foreground/60 mt-2 line-clamp-3 text-sm">
+                      {experience.fullDescription}
+                    </p>
+
+                    {/* Indicatore Read More */}
+                    <motion.div
+                      variants={readMoreVariants}
+                      transition={{ duration: 0.3 }}
+                      className="mt-4 text-primary font-medium flex items-center gap-1"
+                    >
+                      Read more <span>→</span>
+                    </motion.div>
+                  </Link>
+                </motion.div>
               </motion.div>
             ))}
           </div>
         </div>
       </main>
     </>
-  )
+  );
 }
