@@ -33,7 +33,7 @@ export default function ExperienceDetailClient({
             href="/"
             className="inline-flex items-center text-primary/80 hover:text-primary mb-8 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Projects
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
           </Link>
 
           <motion.div

@@ -204,36 +204,32 @@ export default function Home() {
             animate="visible"
             className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10"
           >
-            {/* --- INIZIO MODIFICA ROTATING TEXT --- */}
             <div className="mb-8 flex flex-col justify-center items-start min-h-[120px] sm:min-h-[160px]">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-2">
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-2">
                 Hi, I'm <span className="text-primary">Riccardo Ossola</span>.
               </h1>
 
-              <div className="flex items-center text-3xl sm:text-4xl md:text-6xl font-bold">
+              <div className="flex items-center text-2xl sm:text-4xl md:text-6xl font-bold">
                 <span className="mr-3 opacity-90">I build</span>
-                {/* WRAPPER: Gestisce lo sfondo e l'animazione della larghezza */}
                 <motion.div
                   layout
                   transition={{ type: "spring", damping: 25, stiffness: 100 }}
                   className="px-3 sm:px-4 md:px-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-2 sm:py-3 rounded-xl shadow-lg flex items-center justify-center"
                 >
-                  {/* COMPONENTE INTERNO: Gestisce solo il cambio testo */}
                   <RotatingText
                     texts={[
                       "Web Apps",
                       "Embedded Systems",
-                      "Go & Java Sol.",
+                      "Go & Java Solutions",
                       "AI Workflows",
                     ]}
-                    // Rimuoviamo classi di stile sfondo da qui, lasciamo solo overflow e layout
                     mainClassName="overflow-hidden justify-center text-center min-w-max"
                     staggerFrom={"last"}
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
                     exit={{ y: "-120%" }}
                     staggerDuration={0.025}
-                    splitLevelClassName="overflow-hidden pb-3"
+                    splitLevelClassName="overflow-hidden pb-2"
                     transition={{ type: "spring", damping: 30, stiffness: 400 }}
                     rotationInterval={2500}
                   />
@@ -252,7 +248,6 @@ export default function Home() {
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
-              {/* I bottoni vanno bene, magari aggiungi una leggera ombra */}
               <button
                 onClick={scrollToProjects}
                 className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
