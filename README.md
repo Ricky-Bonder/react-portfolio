@@ -57,7 +57,7 @@ Open http://localhost:3000/react-portfolio with your browser to see the result.
 
 ---
 
-📦 **Deployment**
+## 📦 **Deployment**
 
 This project is configured to deploy to **GitHub Pages** using the gh-pages package.
 
@@ -70,3 +70,6 @@ This command will:
 - Build the project (next build).
 - Export the static files to the out/ directory.
 - Push the content of out/ to the gh-pages branch.
+
+## 📄 License
+This project is open source and available under the MIT License.
