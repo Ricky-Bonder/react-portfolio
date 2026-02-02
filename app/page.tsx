@@ -259,7 +259,7 @@ export default function Home() {
                     animate={{ y: 0 }}
                     exit={{ y: "-120%" }}
                     staggerDuration={0.025}
-                    splitLevelClassName="overflow-hidden pb-2"
+                    splitLevelClassName="overflow-hidden lg:pb-2"
                     transition={{ type: "spring", damping: 30, stiffness: 400 }}
                     rotationInterval={2500}
                   />

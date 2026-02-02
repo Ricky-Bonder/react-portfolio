@@ -43,7 +43,7 @@ export default function AboutPage() {
               <p className="max-w-3xl text-lg leading-relaxed text-foreground/70">
                 I bridge the gap between resource-constrained <strong>Embedded Linux</strong> systems and 
                 high-performance <strong>Modern Web</strong> interfaces. With 5 years of experience, 
-                I don't just write code—I own the full product lifecycle, translating vague business 
+                I don't just write code - I own the full product lifecycle, translating vague business 
                 requirements into concrete, scalable technical architectures.
               </p>
             </section>

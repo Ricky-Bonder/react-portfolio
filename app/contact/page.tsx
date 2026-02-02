@@ -100,7 +100,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email</h3>
-                    <p className="text-foreground/70">riccardo.ossola17@gmail.com</p>
+                    <p className="text-foreground/70">riccardo.ossola.work@gmail.com</p>
                   </div>
                 </div>
 
@@ -149,7 +149,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-primary/20 rounded-lg bg-background/50 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
-                      placeholder="John Doe"
+                      placeholder="Insert your name"
                     />
                   </div>
 
@@ -162,7 +162,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-primary/20 rounded-lg bg-background/50 focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-all"
-                      placeholder="john@example.com"
+                      placeholder="Insert your email address"
                     />
                   </div>
 
