@@ -82,10 +82,17 @@ export function ProjectCard({ project, wide = false }: ProjectCardProps) {
               {project.summary}
             </p>
 
-            {project.highlight && (
-              <p className="mt-3 inline-block rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-xs font-semibold text-primary">
-                {project.highlight}
-              </p>
+            {project.highlights && project.highlights.length > 0 && (
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {project.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-xs font-semibold text-primary"
+                  >
+                    {h}
+                  </li>
+                ))}
+              </ul>
             )}
 
             <motion.div

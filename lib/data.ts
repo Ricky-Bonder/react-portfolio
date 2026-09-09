@@ -20,8 +20,8 @@ export interface Project {
   stack: string;
   /** Two-line card summary. */
   summary: string;
-  /** One concrete, measurable result. Only set when there is a real number. */
-  highlight?: string;
+  /** Concrete, measurable results. Only real numbers belong here. */
+  highlights?: string[];
   role: string;
   timeline: string;
   tagline: string;
@@ -48,13 +48,13 @@ export const projects: Project[] = [
     title: "Modern Full-Stack Platform",
     stack: "Go, SvelteKit & Product Architecture",
     summary:
-      "Led the migration of a legacy Java monolith to a Go backend and SvelteKit frontend that runs both on embedded Linux devices and in the browser.",
-    highlight: "60% lower memory footprint",
-    role: "Lead Software Engineer",
+      "On-premise full-stack architecture: one Go backend serves the embedded device, the browser and external clients such as mobile apps, with a SvelteKit frontend on all of them.",
+    highlights: ["Sub-200 ms API responses on constrained hardware", "60% lower memory footprint"],
+    role: "Lead Developer",
     timeline: "2021 - Present",
-    tagline: "Migrating a legacy monolith to Go & SvelteKit.",
+    tagline: "One backend for the device, the browser and mobile clients.",
     overview:
-      "A modernization initiative replacing legacy systems with a cross-platform architecture. The same application runs natively on resource-constrained Embedded Linux devices and serves a responsive web interface for remote management.\n\nReporting directly to management, I drove the full lifecycle: from Product Owner requirements and UX designs to a shipped, scalable product.",
+      "A modernization initiative replacing a legacy Java monolith with a cross-platform architecture. The Go backend runs natively on resource-constrained Embedded Linux devices and serves the SvelteKit interface to the device's own screen, to desktop browsers and to external clients such as mobile apps, opening the product to broader access and scale.\n\nReporting directly to management, I own the full lifecycle: from Product Owner requirements and UX designs to features shipped through GitLab CI/CD.",
     techStack: [
       { name: "Go (Gin/Gorm)", category: "Backend Core" },
       { name: "SvelteKit", category: "Frontend Framework" },
@@ -62,12 +62,13 @@ export const projects: Project[] = [
       { name: "TypeScript", category: "Language" },
       { name: "Playwright", category: "E2E Testing" },
       { name: "Docker", category: "Deployment" },
+      { name: "GitLab CI/CD", category: "Delivery" },
     ],
     challenges: [
       {
         title: "Legacy Migration & Performance",
         description:
-          "Replacing a heavy Java monolith with Go cut the memory footprint by 60% on limited hardware, while a Domain-Driven Design approach kept feature parity.",
+          "Replacing a heavy Java monolith with Go cut the memory footprint by 60% and keeps API responses under 200 ms on limited hardware, while a Domain-Driven Design approach kept feature parity.",
       },
       {
         title: "One UI for Touch Screens and Desktops",
@@ -79,27 +80,30 @@ export const projects: Project[] = [
       "Translated business requirements into concrete technical specifications (TDD/DDD).",
       "Acted as the technical counterpart to the Product Owner and UX Designer.",
       "Designed the RESTful API contract and built the automated E2E testing pipeline.",
+      "Ship features through GitLab CI/CD with Docker, keeping test coverage above 90%.",
     ],
   },
   {
     slug: "java-embedded-app",
     kind: "work",
     icon: "monitor",
-    title: "Embedded Linux HMI",
+    title: "Self-Contained Device Apps",
     stack: "Java 11/17, JavaFX & MQTT",
     summary:
-      "Built the on-device HMI and control logic in JavaFX for Embedded Linux, keeping the UI responsive while API integration and telemetry run in the background.",
-    role: "Embedded Software Engineer",
-    timeline: "2020 - 2021",
-    tagline: "Rich UI and control logic for Embedded Linux with JavaFX.",
+      "Two standalone device applications where frontend and backend both run on the embedded device: sensor interfacing, offline data buffering, REST integration and in-field firmware updates.",
+    highlights: ["2 device apps shipped and maintained across multiple releases"],
+    role: "Lead Developer",
+    timeline: "2020 - Present",
+    tagline: "Frontend and backend running entirely on the embedded device.",
     overview:
-      "Design of the primary Human-Machine Interface (HMI) and high-level control logic for Linux-based embedded devices. Java 11/17 and JavaFX delivered a responsive local interface while the same process handled API integration and protocol management in the background.\n\nThe focus was keeping the application fast on limited hardware without compromising the user experience.",
+      "Design, development and maintenance of two standalone applications for Linux-based embedded devices. Each one is a self-contained system: the JavaFX Human-Machine Interface and the control logic run in the same process on the device, with no external server required.\n\nI own the whole stack, from sensor interfacing and offline data buffering to RESTful API integration and the in-field firmware-update workflow, across multiple releases.",
     techStack: [
       { name: "Java 11/17", category: "Core Runtime" },
       { name: "JavaFX", category: "UI Framework" },
       { name: "Linux (Embedded)", category: "OS" },
       { name: "REST API", category: "Integration" },
       { name: "MQTT", category: "Telemetry" },
+      { name: "JUnit & Mockito", category: "Testing" },
     ],
     challenges: [
       {
@@ -112,24 +116,29 @@ export const projects: Project[] = [
         description:
           "Real-time data from Serial and MQTT sources had to reach the screen without blocking the UI thread, which called for an asynchronous event-handling architecture.",
       },
+      {
+        title: "Offline First",
+        description:
+          "Devices lose connectivity in the field. Data is buffered locally and synchronised when the link returns, and firmware updates can be applied on site without a network.",
+      },
     ],
     responsibilities: [
-      "Designed the JavaFX UI components and wired them to the backend services.",
-      "Maintained the application lifecycle on the Linux target.",
-      "Implemented REST API clients for external configuration and remote control.",
+      "Designed the JavaFX UI components and wired them to the on-device services.",
+      "Own sensor interfacing, offline buffering and REST API integration.",
+      "Run the in-field firmware-update workflow across releases.",
     ],
   },
   {
     slug: "scala-backend",
     kind: "work",
     icon: "activity",
-    title: "Reactive IoT Middleware",
+    title: "Sensor Aggregator Device",
     stack: "Scala, Akka & Concurrency",
     summary:
-      "A fault-tolerant data acquisition service on Scala and Akka Actors that buffers and forwards sensor streams over MQTT through unstable networks.",
-    role: "Backend Engineer",
-    timeline: "2020 - 2021",
-    tagline: "Reactive stream processing with Scala and Akka Actors.",
+      "A fault-tolerant sensor aggregator on Scala and Akka Actors. I add new sensor types as actor-based modules and tune the pipelines that buffer and forward data over MQTT.",
+    role: "Maintenance & Features",
+    timeline: "2020 - Present",
+    tagline: "Actor-based sensor aggregation with Scala and Akka.",
     overview:
       "A backend service that ingests, processes and forwards high-frequency sensor data. Built on the Actor Model with Scala and Akka, it handles concurrency natively so that a failure in one stream, such as a single sensor, never takes down the whole system.\n\nThe service acts as the reliability layer: it buffers data during network instability and guarantees delivery over MQTT.",
     techStack: [
@@ -152,24 +161,25 @@ export const projects: Project[] = [
       },
     ],
     responsibilities: [
-      "Developed the data acquisition services using the Actor Model.",
-      "Ensured reliable communication over Serial and MQTT.",
-      "Designed the internal APIs between system components.",
+      "Add support for new sensor types as actor-based modules.",
+      "Refine the existing pipelines and algorithms for throughput and reliability.",
+      "Maintain the web server communication and the internal APIs between components.",
     ],
   },
   {
     slug: "gateway-backend",
     kind: "work",
     icon: "radio",
-    title: "Legacy IoT Gateway",
+    title: "Industrial Gateway Device",
     stack: "Java 8, Serial & Web Protocols",
     summary:
-      "Maintained and extended the gateway middleware that translates industrial Serial data into web-compatible payloads on a Java 8 runtime.",
-    role: "Java Developer",
-    timeline: "2020 - 2021",
-    tagline: "Bridging Serial devices to web protocols on Java 8.",
+      "Gateway modules that give industrial machines network connectivity: remote retrieval of mechanical and sensor data plus command and control, on a Java 8 runtime.",
+    highlights: ["99.9% uptime"],
+    role: "Maintenance & Features",
+    timeline: "2020 - Present",
+    tagline: "Connecting industrial machines to the network on Java 8.",
     overview:
-      "Maintenance and feature development for the gateway application that translates low-level Serial data into web-compatible formats. Running on a legacy Java 8 environment, it is the bridge between industrial fieldbus protocols and modern web dashboards.\n\nStability, backwards compatibility and efficient transmission over both wired and wireless links were the priorities.",
+      "Maintenance and feature development for the gateway modules that connect industrial machines to the network. The gateway translates low-level Serial data into web-compatible formats, enabling remote retrieval of mechanical and sensor data and command-and-control operations from web dashboards.\n\nRunning on a legacy Java 8 environment, the priorities are stability, backwards compatibility and efficient transmission over both wired and wireless links, sustaining 99.9% uptime.",
     techStack: [
       { name: "Java 8", category: "Language" },
       { name: "Serial Comm", category: "Protocol" },
@@ -198,15 +208,15 @@ export const projects: Project[] = [
     slug: "ev-monitor-backend",
     kind: "work",
     icon: "thermometer",
-    title: "Sensor Data Automation",
-    stack: "Python & Hardware Interfacing",
+    title: "Environmental Monitoring Device",
+    stack: "Python & Sensor Data Acquisition",
     summary:
-      "Python tooling that talks directly to hardware sensors, parses proprietary binary formats and logs environmental data for field verification.",
-    role: "Automation Engineer",
-    timeline: "2020 - 2021",
-    tagline: "Python-driven data extraction and environmental sensing.",
+      "Sensor data acquisition for a device that monitors environmental parameters: Python that talks to the hardware, parses proprietary formats and logs the readings.",
+    role: "Maintenance & Features",
+    timeline: "2020 - Present",
+    tagline: "Python sensor acquisition for environmental monitoring.",
     overview:
-      "A scripting and backend toolset for automated sensor data retrieval. Python interfaces directly with hardware sensors (environmental and EV metrics), parses their data structures and formats the output for analysis.\n\nIt works as a standalone monitoring tool that can be deployed quickly to verify hardware performance in the field.",
+      "The data-acquisition layer of a device that monitors environmental parameters. Python interfaces directly with the hardware sensors, parses their data structures and formats the readings for logging and analysis.\n\nThe same tooling doubles as a standalone monitor that can be deployed quickly to verify hardware performance in the field.",
     techStack: [
       { name: "Python", category: "Language" },
       { name: "Sensor APIs", category: "Hardware" },
@@ -234,7 +244,7 @@ export const projects: Project[] = [
     stack: "Proxmox, Docker & Hybrid Networking",
     summary:
       "A personal cloud on Proxmox and Docker with split-DNS networking, VPN-tunnelled containers and automated cold-storage backups driven by a smart relay.",
-    highlight: "20+ self-hosted services",
+    highlights: ["20+ self-hosted services"],
     role: "System Engineer & Administrator",
     timeline: "Ongoing",
     tagline: "20+ services on Proxmox and Docker, built and run at home.",
@@ -304,6 +314,17 @@ export const aiWorkflow = {
         "From requirement to reviewed, tested code in roughly a third of the time it used to take me, measured on my own delivery cycle.",
     },
   ] satisfies Array<{ icon: ProjectIcon; title: string; description: string }>,
-  /** Anthropic certification names, shown as chips when present. */
-  certifications: [] as string[],
+  /** Anthropic certificates, shown as chips when present. */
+  certifications: [
+    { name: "Introduction to Agent Skills", issuer: "Anthropic", issued: "June 2026", credentialId: "u8os6jnnaqbc" },
+    { name: "Introduction to Subagents", issuer: "Anthropic", issued: "June 2026", credentialId: "y7uvhmxbccbp" },
+  ],
 };
+
+/** Career-wide numbers, shown as a strip under the hero. */
+export const stats = [
+  { value: "<200 ms", label: "API responses on constrained hardware" },
+  { value: "99.9%", label: "uptime on the industrial gateway" },
+  { value: "20+", label: "features per quarter, zero rollbacks" },
+  { value: "90%+", label: "test coverage with JUnit, Mockito & Playwright" },
+];

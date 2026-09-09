@@ -33,6 +33,7 @@ import { FaJava } from "react-icons/fa";
 import RotatingText from "@/components/RotatingText";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { HowIWork } from "@/components/HowIWork";
+import { StatsStrip } from "@/components/StatsStrip";
 
 const toolsTechs = [
   { node: <FaJava />, title: "Java", href: "https://www.java.com" },
@@ -145,7 +146,11 @@ export default function Home() {
             </button>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mt-16">
+          <motion.div variants={itemVariants} className="mt-14">
+            <StatsStrip />
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="mt-14">
             <p className="text-sm text-foreground/60 mb-4">
               Backend, Frontend & DevOps tools I work with:
             </p>

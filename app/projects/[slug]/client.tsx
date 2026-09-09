@@ -62,10 +62,17 @@ export default function ExperienceDetailClient({ project }: { project: Project }
               {project.tagline}
             </p>
 
-            {project.highlight && (
-              <p className="mt-6 inline-block rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm font-semibold text-primary">
-                {project.highlight}
-              </p>
+            {project.highlights && project.highlights.length > 0 && (
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {project.highlights.map((h) => (
+                  <li
+                    key={h}
+                    className="rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm font-semibold text-primary"
+                  >
+                    {h}
+                  </li>
+                ))}
+              </ul>
             )}
           </motion.div>
         </section>

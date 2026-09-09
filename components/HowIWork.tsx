@@ -46,14 +46,16 @@ export function HowIWork() {
       {aiWorkflow.certifications.length > 0 && (
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center gap-2 text-sm font-medium text-foreground/70">
-            <Award className="h-4 w-4 text-primary" /> Anthropic certifications
+            <Award className="h-4 w-4 text-primary" /> Certificates
           </span>
           {aiWorkflow.certifications.map((cert) => (
             <span
-              key={cert}
+              key={cert.credentialId}
+              title={`Credential ID ${cert.credentialId}`}
               className="rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5 text-sm font-medium text-primary"
             >
-              {cert}
+              {cert.name}
+              <span className="text-primary/60 font-normal"> · {cert.issuer}, {cert.issued}</span>
             </span>
           ))}
         </div>
