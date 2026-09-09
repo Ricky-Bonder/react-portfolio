@@ -63,7 +63,7 @@ This project is configured to deploy to **GitHub Pages** using the gh-pages pack
 
 To deploy a new version:
 
-    npm run dev
+    npm run deploy
 
 This command will:
 
