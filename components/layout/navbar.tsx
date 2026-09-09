@@ -1,30 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react"; // Aggiunto useEffect
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-export function Navbar() {
-  // MODIFICA 1: Estraiamo resolvedTheme
-  const { setTheme, resolvedTheme } = useTheme();
-  
-  // MODIFICA 2: Aggiungiamo setMounted per poter cambiare lo stato
-  const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+const navItems = [
+  { label: "Home", href: "/", mobile: false },
+  { label: "Projects", href: "/projects", mobile: true },
+  { label: "About", href: "/about", mobile: true },
+  { label: "Contact", href: "/contact", mobile: true },
+];
 
-  // MODIFICA 3: Effettivamente impostiamo mounted a true quando il componente è caricato
+/** Strip a trailing slash so "/about/" and "/about" compare equal. */
+function normalize(path: string): string {
+  return path.length > 1 ? path.replace(/\/+$/, "") : path;
+}
+
+export function Navbar() {
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const pathname = normalize(usePathname() ?? "/");
+
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const navItems = [
-    { label: "Home", href: "/" },
-    { label: "Projects", href: "/projects" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ];
 
   return (
     <motion.nav
@@ -34,39 +35,37 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="font-bold text-2xl">
+          <Link href="/" className="font-bold text-2xl" aria-label="Home">
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/assets/gifs/porygon_sprite.gif`}
-              alt="Home"
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/assets/gifs/porygon_sprite.gif`}
+              alt=""
               className="w-10 h-10"
             />
           </Link>
 
-          <div className="flex gap-4 md:gap-10 md:font-md items-center">
+          <div className="flex gap-4 md:gap-10 items-center">
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname === normalize(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                 className={`transition-colors text-lg ${
+                  className={`transition-colors text-lg ${item.mobile ? "" : "hidden sm:inline-block"} ${
                     isActive
-                      ? "font-bold  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg p-1"
-                      : "text-foreground/70 hover:text-primary" // Stile inattivo (uguale al tuo paragrafo)
+                      ? "font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg px-2 py-1"
+                      : "text-foreground/70 hover:text-primary"
                   }`}
                 >
                   {item.label}
                 </Link>
               );
             })}
-            
-            {/* MODIFICA 4: Bottone aggiornato con resolvedTheme */}
+
             <button
               onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
               className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors"
               aria-label="Toggle Theme"
             >
-              {/* Mostra l'icona solo se montato per evitare errori di idratazione */}
               {mounted ? (resolvedTheme === "dark" ? "🌙" : "☀️") : <div className="w-6 h-6" />}
             </button>
           </div>

@@ -2,10 +2,12 @@
 
 import { Navbar } from '@/components/layout/navbar'
 import { motion } from 'framer-motion'
-import Particles from '@/components/Particles'
+import ThemedParticles from '@/components/ThemedParticles'
 import { useState } from 'react'
 import { Send, Mail, MapPin, Github, Linkedin, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+
+const CONTACT_EMAIL = 'riccardo.ossola.work@gmail.com'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -24,8 +26,11 @@ export default function ContactPage() {
     const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID; 
     
     if (!formId) {
-      console.error("Formspree ID missing");
-      setStatus('error');
+      // Static build without a Formspree id: hand the message to the visitor's mail client.
+      const subject = encodeURIComponent(`Portfolio contact from ${formData.name}`)
+      const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name} <${formData.email}>`)
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+      setStatus('idle')
       return;
     }
 
@@ -61,21 +66,7 @@ export default function ContactPage() {
       <Navbar />
       <main className="min-h-screen bg-background relative overflow-hidden">
         
-        {/* --- PARTICLES BACKGROUND --- */}
-        <div className="absolute inset-0 z-0">
-          <div style={{ width: "100%", height: "100%", position: "absolute" }}>
-            <Particles
-              particleColors={["#ffffff", "#ffffff"]}
-              particleCount={200}
-              particleSpread={10}
-              speed={0.05}
-              particleBaseSize={80}
-              moveParticlesOnHover={false}
-              alphaParticles={false}
-              disableRotation={false}
-            />
-          </div>
-        </div>
+        <ThemedParticles />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <motion.div
@@ -100,7 +91,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email</h3>
-                    <p className="text-foreground/70">riccardo.ossola.work@gmail.com</p>
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-foreground/70 hover:text-primary transition-colors">{CONTACT_EMAIL}</a>
                   </div>
                 </div>
 
@@ -213,7 +204,7 @@ export default function ContactPage() {
                       animate={{ opacity: 1, y: 0 }}
                       className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-center"
                     >
-                      Something went wrong. Please try again or email directly.
+                      Something went wrong. Please try again or write to {CONTACT_EMAIL}.
                     </motion.div>
                   )}
                 </form>

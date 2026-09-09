@@ -43,10 +43,11 @@ A modern, high-performance personal portfolio website built to showcase projects
    npm install
    ```
 
-3. **Environment Setup Create a .env.local file in the root directory to configure the contact form (optional)**
+3. **Environment Setup (optional, for the contact form)**
     ```bash
-    NEXT_PUBLIC_FORMSPREE_ID=your_form_id_here
+    cp .env.example .env.local   # then fill in NEXT_PUBLIC_FORMSPREE_ID
     ```
+    Without it the form falls back to opening the visitor's mail client.
 
 4. **Run Development Server**
     ```bash

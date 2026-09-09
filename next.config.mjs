@@ -5,6 +5,9 @@ const repoName = '/react-portfolio';
 
 const nextConfig = {
   output: 'export',
+
+  // GitHub Pages serves folder/index.html, so both /about and /about/ resolve
+  trailingSlash: true,
   
   // Configurazione per il routing di Next.js
   basePath: repoName,
