@@ -32,6 +32,7 @@ import {
 import { FaJava } from "react-icons/fa";
 import RotatingText from "@/components/RotatingText";
 import { ProjectGrid } from "@/components/ProjectGrid";
+import { HowIWork } from "@/components/HowIWork";
 
 const toolsTechs = [
   { node: <FaJava />, title: "Java", href: "https://www.java.com" },
@@ -162,6 +163,13 @@ export default function Home() {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* HOW I WORK */}
+        <section className="relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+            <HowIWork />
+          </div>
+        </section>
 
         {/* WORK + PERSONAL */}
         <section ref={projectsRef} className="relative z-10 scroll-mt-16">

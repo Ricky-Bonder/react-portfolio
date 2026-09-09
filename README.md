@@ -43,18 +43,14 @@ A modern, high-performance personal portfolio website built to showcase projects
    npm install
    ```
 
-3. **Environment Setup (optional, for the contact form)**
-    ```bash
-    cp .env.example .env.local   # then fill in NEXT_PUBLIC_FORMSPREE_ID
-    ```
-    Without it the form falls back to opening the visitor's mail client.
+3. **Contact form**: the Formspree form id lives in `app/contact/page.tsx`. `NEXT_PUBLIC_FORMSPREE_ID` in `.env.local` overrides it (see `.env.example`).
 
 4. **Run Development Server**
     ```bash
     npm run dev
     ```
 
-Open http://localhost:3000/react-portfolio with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result. The `/react-portfolio` base path is only applied in production builds.
 
 ---
 

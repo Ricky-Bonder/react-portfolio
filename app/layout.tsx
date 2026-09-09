@@ -1,8 +1,7 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import '@/app/globals.css'
-
-const siteName = 'Riccardo Ossola'
+import { SITE_NAME as siteName } from '@/lib/data'
 const description =
   'Software engineer bridging resource-constrained Embedded Linux systems and modern web interfaces. Go, SvelteKit, Java and Scala on real hardware.'
 

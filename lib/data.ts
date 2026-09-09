@@ -31,6 +31,8 @@ export interface Project {
   responsibilities: string[];
 }
 
+export const SITE_NAME = "Riccardo Ossola";
+
 /** First year of professional experience, used to compute "N+ years". */
 export const CAREER_START_YEAR = 2020;
 
@@ -272,3 +274,36 @@ export const personalProjects = projects.filter((p) => p.kind === "personal");
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
+
+/**
+ * How I develop: AI-assisted engineering with Claude. Not a project of its own,
+ * but the working method behind the recent ones.
+ */
+export const aiWorkflow = {
+  kicker: "AI-native development",
+  title: "How I Work",
+  intro:
+    "Claude is part of my daily engineering loop, not an autocomplete. I design the workflow around it: reusable skills for recurring tasks, hooks that enforce the project's rules automatically, MCP servers that connect the agent to real tools, and sub-agents that research, implement and review in parallel while I stay on architecture and product decisions.",
+  points: [
+    {
+      icon: "layers",
+      title: "Skills & Hooks",
+      description:
+        "Skills capture how a task is done in a given codebase so it is done the same way every time. Hooks run checks and formatting on every change, without anyone having to remember.",
+    },
+    {
+      icon: "radio",
+      title: "MCP & Agents",
+      description:
+        "MCP servers give the agent access to the tools around the code: issue trackers, browsers, deploy targets. Sub-agents split research, implementation and review so the work runs in parallel.",
+    },
+    {
+      icon: "activity",
+      title: "About 3x faster",
+      description:
+        "From requirement to reviewed, tested code in roughly a third of the time it used to take me, measured on my own delivery cycle.",
+    },
+  ] satisfies Array<{ icon: ProjectIcon; title: string; description: string }>,
+  /** Anthropic certification names, shown as chips when present. */
+  certifications: [] as string[],
+};

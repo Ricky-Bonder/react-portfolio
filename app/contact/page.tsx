@@ -21,18 +21,8 @@ export default function ContactPage() {
     e.preventDefault()
     setStatus('submitting')
 
-    // Using Formspree for static site email handling
-    // Ensure you have NEXT_PUBLIC_FORMSPREE_ID in your .env.local
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID; 
-    
-    if (!formId) {
-      // Static build without a Formspree id: hand the message to the visitor's mail client.
-      const subject = encodeURIComponent(`Portfolio contact from ${formData.name}`)
-      const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name} <${formData.email}>`)
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
-      setStatus('idle')
-      return;
-    }
+    // Formspree form id. Public by nature; NEXT_PUBLIC_FORMSPREE_ID can override it at build time.
+    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'xgozprkv'
 
     try {
       const response = await fetch(`https://formspree.io/f/${formId}`, {

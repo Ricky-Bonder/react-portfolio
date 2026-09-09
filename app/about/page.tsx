@@ -5,6 +5,7 @@ import { Server, Cpu, Code2, Globe, Terminal, Layers } from 'lucide-react'
 import { motion } from 'framer-motion'
 import ThemedParticles from '@/components/ThemedParticles'
 import { yearsOfExperience } from '@/lib/data'
+import { HowIWork } from '@/components/HowIWork'
 
 const arsenal = [
   { icon: Code2, title: 'Languages', items: ['Go (Golang)', 'TypeScript / JS', 'Java (8/11/17)', 'Scala', 'Python'] },
@@ -72,6 +73,11 @@ export default function AboutPage() {
                 </p>
               </motion.div>
             </section>
+
+            {/* HOW I WORK */}
+            <div className="mb-20">
+              <HowIWork />
+            </div>
 
             {/* TECH ARSENAL */}
             <section className="mb-20">

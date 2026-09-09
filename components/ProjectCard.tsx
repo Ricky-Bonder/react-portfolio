@@ -61,7 +61,7 @@ export function ProjectCard({ project, wide = false }: ProjectCardProps) {
 
       <div className="relative h-full w-full bg-background/95 backdrop-blur-sm p-6 rounded-xl border">
         <Link
-          href={`/experiences/${project.slug}`}
+          href={`/projects/${project.slug}`}
           className={`block h-full ${wide ? "md:grid md:grid-cols-[auto_1fr] md:gap-8 md:items-start" : ""}`}
         >
           <div className="flex items-center gap-3 mb-3">
